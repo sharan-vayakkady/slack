@@ -20,7 +20,9 @@ jobs:
 
       - name: Compare Master and Staging
         id: branch-compare
-        run: ./merge_conflict_check.sh
+        run: |
+          chmod +x merge_conflict_check.sh
+          ./merge_conflict_check.sh
 
       - name: Notify Slack
         env:
