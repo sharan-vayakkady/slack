@@ -8,7 +8,10 @@ on:
 jobs:
   notify-slack:
     runs-on: ubuntu-latest
-
+    # Permissions for interacting with Github OIDC token
+    permissions:
+     id-token: write
+     contents: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -17,9 +20,7 @@ jobs:
 
       - name: Compare Master and Staging
         id: branch-compare
-        run: |
-          chmod +x merge_conflict_check.sh
-          ./merge_conflict_check.sh  
+        run: ./merge_conflict_check.sh
 
       - name: Notify Slack
         env:
