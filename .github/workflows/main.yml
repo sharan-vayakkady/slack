@@ -4,7 +4,12 @@ on:
   pull_request:
     branches:
       - main
-
+env:
+ USERNAME: "ci-bot"
+ EMAIL: "sharan.vayakkady@gmail.com"
+ ORIGIN_BRANCH: main
+ MERGE_BRANCH: staging
+ 
 jobs:
   notify-slack:
     runs-on: ubuntu-latest
@@ -20,9 +25,7 @@ jobs:
 
       - name: Compare Master and Staging
         id: branch-compare
-        run: |
-          chmod +x ./merge_conflict_check.sh
-          ./merge_conflict_check.sh
+        run: ./merge_conflict_check.sh
 
       - name: Notify Slack
         env:
